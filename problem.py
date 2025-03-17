@@ -5,19 +5,12 @@ Problem:
 	determine the assignment of the movable coordinates so that they 
 	are positioned on the static coordinates with the least possible movement
 
-	Solution I found, but don't understand well enough to implement. Time complexity: 
-		The Hungarian method/algorithm for the assignment problem / weighted bipartite matchings
-		The specifc weight for each combanation of static and movable points would be the euclidean distance between their positions
-
-	Alternative that I thought of using a greedy policy. Time complexity ranging from O(N) to O(N!) depending on the initial state:
+	Solution using a greedy policy: Time complexity ranging from O(N) to O(N!) depending on the initial state:
 		use most optimal assignment for each movable point
 		for group of shared assignments, don't change the assignment of the point that benifits the most from it's optimal assignment, 
 			but change the rest to their second most optimal assignment. If one of these assignments conflits with a previous final assignment, 
 			consider it a shared assignment on the next repitition
 		repeat the preivous step until all assignments are made
-
-	Brute force solution. Time complexity: O(N^N), could be optimized:
-		Go through every combonation of assignments and choose the combonation with the least total weight. 
 '''
 
 import random
@@ -42,8 +35,6 @@ def get_greedy_assignments(weight_matrix, rep_limit = 100):
 				smallest = value
 		for j in range(len(weight_matrix[i])):
 			weight_matrix[i][j] -= smallest
-	
-	print(weight_matrix)
 
 	# assignments[moveable point index] = static point index (assignment index)
 	assignments = [None for i in range(len(weight_matrix))]
@@ -103,11 +94,11 @@ def get_greedy_assignments(weight_matrix, rep_limit = 100):
 					active_shared_assignment_indicies.add(next_optimal_assignment_index)
 		
 		if (reps % 50) == 0:
-			print(f"{reps} reps completed")
+			print(f">= {reps} reps completed")
 		reps += 1
 
 	if reps == rep_limit:
-		print("Assignment not found")
+		print("Absolute assignment not found")
 	
 	return assignments
 
@@ -136,9 +127,7 @@ for i in range(num_coordinates):
 		weight_matrix[i][j] = round((x_distance**2 + y_distance**2)**0.5, coordinate_precision + 3)
 
 # Display the weight matrix
-print(weight_matrix)
 assignments = get_greedy_assignments(weight_matrix)
-print(assignments)
 
 # Graph generated coordinates
 if graph_coordinates:
