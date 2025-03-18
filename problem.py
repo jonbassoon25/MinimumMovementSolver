@@ -85,12 +85,12 @@ def get_greedy_assignments(weight_matrix, rep_limit = 100):
 							next_optimal_assignment_index = k
 							no_index_found = False
 				if no_index_found:
-					raise Exception("No index was calculated. Plz fix")
+					raise Exception("No index was calculated.")
 			
 				#Assign the new assignment
 				assignments[conflicting_indicies[j]] = next_optimal_assignment_index
 				shared_assignments[next_optimal_assignment_index].append(conflicting_indicies[j])
-				if len(shared_assignments[next_optimal_assignment_index]) > 0:
+				if len(shared_assignments[next_optimal_assignment_index]) > 1:
 					active_shared_assignment_indicies.add(next_optimal_assignment_index)
 		
 		if (reps % 50) == 0:
@@ -105,9 +105,9 @@ def get_greedy_assignments(weight_matrix, rep_limit = 100):
 
 
 # Test vars
-num_coordinates = 16
-coordinate_range = (0, 10)
-coordinate_precision = 2 #number of coordinates past the decimal for each generated coordinate
+num_coordinates = 60
+coordinate_range = (0, 100)
+coordinate_precision = 4 #number of coordinates past the decimal for each generated coordinate
 graph_coordinates = True
 
 # Generate coordinates
