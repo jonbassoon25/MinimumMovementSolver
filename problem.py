@@ -20,7 +20,7 @@ import math
 
 
 #Generates assignments for a given weight matrix using a greedy policy
-def get_greedy_assignments(weight_matrix, rep_limit = 100):
+def get_greedy_assignments(weight_matrix, rep_limit = 1000):
 	#Matrix rows are movable points
 	#Matrix columns are static points
 	if len(weight_matrix) != len(weight_matrix[0]):
